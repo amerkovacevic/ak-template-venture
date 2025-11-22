@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, ChevronDown } from 'lucide-react'
 
-function Header() {
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [solutionsOpen, setSolutionsOpen] = useState(false)
+  const [customersOpen, setCustomersOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,117 +15,92 @@ function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setIsMobileMenuOpen(false)
-    }
-  }
-
   return (
-    <header
+    <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm'
-          : 'bg-transparent'
+        isScrolled ? 'bg-white shadow-md' : 'bg-white/95 backdrop-blur-sm'
       }`}
     >
       <nav className="container-custom py-4">
         <div className="flex items-center justify-between">
+          {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-yellow-accent rounded-lg flex items-center justify-center">
-              <span className="text-neutral-900 font-bold text-xl">V</span>
+            <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-xl">V</span>
             </div>
-            <span className="text-xl font-bold text-neutral-900">Venture</span>
+            <span className="text-2xl font-bold text-neutral-900">Venture</span>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <button
-              onClick={() => scrollToSection('features')}
-              className="text-neutral-700 hover:text-neutral-900 transition-colors font-medium"
-            >
-              Features
-            </button>
-            <button
-              onClick={() => scrollToSection('pricing')}
-              className="text-neutral-700 hover:text-neutral-900 transition-colors font-medium"
-            >
-              Pricing
-            </button>
-            <button
-              onClick={() => scrollToSection('testimonials')}
-              className="text-neutral-700 hover:text-neutral-900 transition-colors font-medium"
-            >
-              Testimonials
-            </button>
-            <button
-              onClick={() => scrollToSection('faq')}
-              className="text-neutral-700 hover:text-neutral-900 transition-colors font-medium"
-            >
-              FAQ
-            </button>
-            <button
-              onClick={() => scrollToSection('hero')}
-              className="btn-primary"
-            >
-              Get Started
-            </button>
+            <div className="relative group">
+              <button
+                className="flex items-center space-x-1 text-neutral-700 hover:text-accent transition-colors font-medium"
+                onMouseEnter={() => setSolutionsOpen(true)}
+                onMouseLeave={() => setSolutionsOpen(false)}
+              >
+                <span>Solutions</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${solutionsOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {solutionsOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-neutral-200 py-2"
+                  onMouseEnter={() => setSolutionsOpen(true)}
+                  onMouseLeave={() => setSolutionsOpen(false)}
+                >
+                  <a href="#" className="block px-4 py-2 text-neutral-700 hover:bg-neutral-50 hover:text-accent">Procurement</a>
+                  <a href="#" className="block px-4 py-2 text-neutral-700 hover:bg-neutral-50 hover:text-accent">Sales</a>
+                  <a href="#" className="block px-4 py-2 text-neutral-700 hover:bg-neutral-50 hover:text-accent">Legal</a>
+                </div>
+              )}
+            </div>
+            <div className="relative group">
+              <button
+                className="flex items-center space-x-1 text-neutral-700 hover:text-accent transition-colors font-medium"
+                onMouseEnter={() => setCustomersOpen(true)}
+                onMouseLeave={() => setCustomersOpen(false)}
+              >
+                <span>Customers</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${customersOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {customersOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-neutral-200 py-2"
+                  onMouseEnter={() => setCustomersOpen(true)}
+                  onMouseLeave={() => setCustomersOpen(false)}
+                >
+                  <a href="#" className="block px-4 py-2 text-neutral-700 hover:bg-neutral-50 hover:text-accent">Case Studies</a>
+                  <a href="#" className="block px-4 py-2 text-neutral-700 hover:bg-neutral-50 hover:text-accent">Testimonials</a>
+                </div>
+              )}
+            </div>
+            <a href="#" className="text-neutral-700 hover:text-accent transition-colors font-medium">Pricing</a>
+            <button className="text-accent hover:text-accent-dark transition-colors font-medium">Login</button>
+            <button className="btn-primary">Start Now</button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden text-neutral-900"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
         {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
+        {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 space-y-4 animate-slide-down">
-            <button
-              onClick={() => scrollToSection('features')}
-              className="block w-full text-left text-neutral-700 hover:text-neutral-900 transition-colors font-medium py-2"
-            >
-              Features
-            </button>
-            <button
-              onClick={() => scrollToSection('pricing')}
-              className="block w-full text-left text-neutral-700 hover:text-neutral-900 transition-colors font-medium py-2"
-            >
-              Pricing
-            </button>
-            <button
-              onClick={() => scrollToSection('testimonials')}
-              className="block w-full text-left text-neutral-700 hover:text-neutral-900 transition-colors font-medium py-2"
-            >
-              Testimonials
-            </button>
-            <button
-              onClick={() => scrollToSection('faq')}
-              className="block w-full text-left text-neutral-700 hover:text-neutral-900 transition-colors font-medium py-2"
-            >
-              FAQ
-            </button>
-            <button
-              onClick={() => scrollToSection('hero')}
-              className="btn-primary w-full"
-            >
-              Get Started
-            </button>
+            <a href="#" className="block text-neutral-700 hover:text-accent transition-colors py-2 font-medium">Solutions</a>
+            <a href="#" className="block text-neutral-700 hover:text-accent transition-colors py-2 font-medium">Customers</a>
+            <a href="#" className="block text-neutral-700 hover:text-accent transition-colors py-2 font-medium">Pricing</a>
+            <button className="block w-full text-left text-accent hover:text-accent-dark transition-colors py-2 font-medium">Login</button>
+            <button className="btn-primary w-full">Start Now</button>
           </div>
         )}
       </nav>
     </header>
   )
 }
-
-export default Header
 

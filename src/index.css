@@ -8,33 +8,41 @@
   }
   
   body {
-    @apply bg-neutral-50 text-neutral-900 font-sans antialiased;
+    @apply bg-white text-neutral font-body;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold;
+    @apply font-display font-bold;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-yellow-accent hover:bg-yellow-accent-hover text-neutral-900 font-semibold py-3 px-8 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl active:scale-95;
+    @apply bg-accent hover:bg-accent-dark text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg;
   }
 
   .btn-secondary {
-    @apply bg-transparent border-2 border-neutral-300 hover:border-neutral-400 text-neutral-700 hover:text-neutral-900 font-semibold py-3 px-8 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95;
+    @apply bg-white hover:bg-neutral-50 text-accent border-2 border-accent font-semibold py-3 px-6 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105;
+  }
+
+  .btn-outline {
+    @apply bg-transparent border-2 border-accent text-accent hover:bg-accent hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 ease-in-out;
   }
 
   .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
+    @apply py-16 md:py-24;
   }
 
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  .gradient-text {
-    @apply bg-gradient-to-r from-neutral-800 to-neutral-600 bg-clip-text text-transparent;
+  .card {
+    @apply bg-white rounded-2xl p-6 shadow-sm border border-secondary transition-all duration-300 ease-in-out hover:shadow-lg;
+  }
+
+  .card-elevated {
+    @apply bg-white rounded-2xl p-8 shadow-md border border-secondary transition-all duration-300 ease-in-out hover:shadow-xl;
   }
 }
 
@@ -43,24 +51,26 @@
     @apply transition-all duration-300 ease-in-out;
   }
 
-  .glass-effect {
-    @apply bg-white/80 backdrop-blur-md border border-neutral-200/50;
+  .text-balance {
+    text-wrap: balance;
   }
+}
 
-  .animation-delay-200 {
-    animation-delay: 200ms;
+/* Scroll animation for logos */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
   }
+  100% {
+    transform: translateX(-50%);
+  }
+}
 
-  .animation-delay-400 {
-    animation-delay: 400ms;
-  }
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
 
-  .animation-delay-600 {
-    animation-delay: 600ms;
-  }
-
-  .animation-delay-800 {
-    animation-delay: 800ms;
-  }
+.animate-scroll:hover {
+  animation-play-state: paused;
 }
 

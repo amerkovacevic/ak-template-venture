@@ -1,157 +1,82 @@
-import { Github, Twitter, Linkedin, Mail } from 'lucide-react'
+import { Twitter, Linkedin, Facebook, Instagram } from 'lucide-react'
 
-function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+export default function Footer() {
+  const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-neutral-900 text-neutral-300">
+    <footer className="bg-accent-dark text-white">
       <div className="container-custom py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Brand */}
+        <div className="grid md:grid-cols-4 gap-8 mb-8">
+          {/* Logo and Contact */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-yellow-accent rounded-lg flex items-center justify-center">
-                <span className="text-neutral-900 font-bold text-xl">V</span>
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                <span className="text-accent-dark font-bold text-xl">V</span>
               </div>
-              <span className="text-xl font-bold text-white">Venture</span>
+              <span className="text-2xl font-bold">Venture</span>
             </div>
-            <p className="text-neutral-400 text-sm">
-              Launch your product faster with the all-in-one platform built for modern startups.
-            </p>
+            <p className="text-white/80 mb-2">info@venture.com</p>
+            <p className="text-white/80">+1 123 456 789</p>
           </div>
 
           {/* Product */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Product</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <button
-                  onClick={() => {
-                    const el = document.getElementById('features')
-                    el?.scrollIntoView({ behavior: 'smooth' })
-                  }}
-                  className="hover:text-yellow-accent transition-colors"
-                >
-                  Features
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => {
-                    const el = document.getElementById('pricing')
-                    el?.scrollIntoView({ behavior: 'smooth' })
-                  }}
-                  className="hover:text-yellow-accent transition-colors"
-                >
-                  Pricing
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={scrollToTop}
-                  className="hover:text-yellow-accent transition-colors"
-                >
-                  Documentation
-                </button>
-              </li>
+            <h3 className="font-bold text-lg mb-4">Product</h3>
+            <ul className="space-y-2">
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Why Venture</a></li>
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Features</a></li>
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Vision</a></li>
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Technology</a></li>
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Security</a></li>
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Solutions */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Company</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <button
-                  onClick={scrollToTop}
-                  className="hover:text-yellow-accent transition-colors"
-                >
-                  About
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => {
-                    const el = document.getElementById('testimonials')
-                    el?.scrollIntoView({ behavior: 'smooth' })
-                  }}
-                  className="hover:text-yellow-accent transition-colors"
-                >
-                  Testimonials
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={scrollToTop}
-                  className="hover:text-yellow-accent transition-colors"
-                >
-                  Careers
-                </button>
-              </li>
+            <h3 className="font-bold text-lg mb-4">Solutions</h3>
+            <ul className="space-y-2">
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Procurement</a></li>
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Sales</a></li>
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Legal</a></li>
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Mid-Market</a></li>
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Enterprise</a></li>
             </ul>
           </div>
 
-          {/* Support */}
+          {/* Resources */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Support</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <button
-                  onClick={() => {
-                    const el = document.getElementById('faq')
-                    el?.scrollIntoView({ behavior: 'smooth' })
-                  }}
-                  className="hover:text-yellow-accent transition-colors"
-                >
-                  FAQ
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={scrollToTop}
-                  className="hover:text-yellow-accent transition-colors"
-                >
-                  Contact
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={scrollToTop}
-                  className="hover:text-yellow-accent transition-colors"
-                >
-                  Privacy Policy
-                </button>
-              </li>
+            <h3 className="font-bold text-lg mb-4">Resources</h3>
+            <ul className="space-y-2">
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Pricing</a></li>
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Contact Sales</a></li>
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Company</a></li>
+              <li><a href="#" className="text-white/80 hover:text-white transition-colors">Blog</a></li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-neutral-800 pt-8 flex flex-col md:flex-row items-center justify-between">
-          <p className="text-sm text-neutral-400 mb-4 md:mb-0">
-            © {new Date().getFullYear()} Venture Startup. All rights reserved.
+        <div className="border-t border-white/20 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-white/80 text-sm mb-4 md:mb-0">
+            © Copyright {currentYear} Venture. All rights reserved.
           </p>
-          <div className="flex items-center space-x-4">
-            <button className="hover:text-yellow-accent transition-colors">
+          <div className="flex space-x-4">
+            <a href="#" className="text-white/80 hover:text-white transition-colors">
               <Twitter className="w-5 h-5" />
-            </button>
-            <button className="hover:text-yellow-accent transition-colors">
-              <Github className="w-5 h-5" />
-            </button>
-            <button className="hover:text-yellow-accent transition-colors">
+            </a>
+            <a href="#" className="text-white/80 hover:text-white transition-colors">
               <Linkedin className="w-5 h-5" />
-            </button>
-            <button className="hover:text-yellow-accent transition-colors">
-              <Mail className="w-5 h-5" />
-            </button>
+            </a>
+            <a href="#" className="text-white/80 hover:text-white transition-colors">
+              <Facebook className="w-5 h-5" />
+            </a>
+            <a href="#" className="text-white/80 hover:text-white transition-colors">
+              <Instagram className="w-5 h-5" />
+            </a>
           </div>
         </div>
       </div>
     </footer>
   )
 }
-
-export default Footer
 
